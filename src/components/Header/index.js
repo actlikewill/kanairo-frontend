@@ -1,13 +1,14 @@
 import React from 'react';
-import { InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import {ReactComponent as Logo} from './img/logo.svg';
 import './Header.scss';
 
 export default class Header extends React.Component {
     render() {
       return (
+        <Container className='p-0 m-0' fluid>
         <div className="header">
-          <Row className="d-flex align-items-center">
+          <Row noGutters={true} className="d-flex align-items-center">
             <Col>
               <Logo className="svg-logo"/>
             </Col>
@@ -35,6 +36,7 @@ export default class Header extends React.Component {
             </Col>
           </Row>
         </div>
+        </Container>
       );
     }
   }

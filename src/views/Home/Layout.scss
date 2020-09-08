@@ -1,0 +1,19 @@
+.withMenu {
+    width: 70rem;
+    display: grid;
+    grid-template-columns: calc(70rem / 5 - 2.5rem) 4fr;
+    grid-template-areas: "sideMenu thumbnails";
+}
+
+.sideMenu {
+    grid-area: sideMenu;
+    display:none;
+    
+}
+
+.thumbnails {
+    grid-area: thumbnails
+}
+.showMenu {
+    display: block;
+}

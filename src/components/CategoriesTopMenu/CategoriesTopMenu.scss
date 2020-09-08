@@ -1,0 +1,12 @@
+.menu-items {
+    width: 70.8rem;
+    background-color: #ddd;
+    font: .8em sans-serif;
+
+
+    .menu-item:hover {
+        color: grey;
+        cursor: pointer;
+        background-color: #ccc;
+    }
+}

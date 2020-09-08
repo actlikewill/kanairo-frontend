@@ -64,6 +64,7 @@ export default class AdThumbnails extends React.Component {
     render() {
 
         return (
+            <div className="thumbnails">
             <Row>
             {data.map(item => {
                 return (
@@ -74,6 +75,7 @@ export default class AdThumbnails extends React.Component {
                 )
             })}
             </Row>
+            </div>
         )
     }
 }

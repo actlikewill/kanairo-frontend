@@ -1,4 +1,11 @@
-.adThumbnail {
+.largerThumbnail {
+    width: calc(69rem / 4);    
+}
+.smallerThumbnail {
+    width: calc(70rem / 5);
+}
+
+.adThumbnail {   
     .title {
         font-size: 1rem;
     }
