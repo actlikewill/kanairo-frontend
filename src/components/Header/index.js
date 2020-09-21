@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import {ReactComponent as Logo} from './img/logo.svg';
 import './Header.scss';
+import history from '../../App/history';
 
 export default class Header extends React.Component {
     render() {
@@ -30,7 +31,7 @@ export default class Header extends React.Component {
             </Col>
 
             <Col className="d-flex justify-content-end">
-            <Button variant="danger" size="lg">
+            <Button onClick={() => history.push("/create-ad")} variant="danger" size="lg">
               Create Ad
             </Button>{' '}
             </Col>

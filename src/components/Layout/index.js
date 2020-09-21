@@ -3,7 +3,7 @@ import './Layout.scss';
 import { connect } from 'react-redux';
 
 
-class MainContainer extends React.Component {
+class Layout extends React.Component {
     render() {
       const { showMenu } = this.props;
       return (
@@ -19,4 +19,4 @@ function mapStateToProps(state) {
   return { showMenu: state.menusReducer.showMenu }
 }
 
-export default connect(mapStateToProps)(MainContainer)
+export default connect(mapStateToProps)(Layout)

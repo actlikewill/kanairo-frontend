@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { openMenu, closeMenu } from '../../redux/actions';
 import { Row, Col } from 'react-bootstrap';
 import './CategoriesTopMenu.scss';
 
-export default class CategoriesTopMenu extends React.Component {
+class CategoriesTopMenu extends React.Component {
 
    constructor(props) {
     super(props);
@@ -32,11 +35,13 @@ export default class CategoriesTopMenu extends React.Component {
              {
              menuItems.map(item => {
                     return (
-                        <Col md='auto'>
-                            <div onClick={() => {openMenu(item)}} className="menu-item p-2 m-0">
-                                {item}
-                            </div>                    
-                        </Col>  
+                       <Link key={item} to="/home">               
+                            <Col md='auto'>
+                                <div onClick={() => {openMenu(item)}} className="menu-item p-2 m-0">
+                                    {item}
+                                </div>                    
+                            </Col>
+                      </Link> 
                     )
                 })
             }             
@@ -44,3 +49,15 @@ export default class CategoriesTopMenu extends React.Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+      openMenu: item => dispatch(openMenu(item)),
+      closeMenu: () => dispatch(closeMenu())
+    }
+  }
+
+export default connect(
+    null,
+    mapDispatchToProps
+  )(CategoriesTopMenu)

@@ -25,7 +25,7 @@ class SideMenu extends React.Component {
         const { showMenu } = this.props;
         return (
             <div className={`${showMenu ? 'showMenu ': ''} sideMenu mr-3`}>
-               {menuItems.map(item => <MenuItem title={item} />)}
+               {menuItems.map(item => <MenuItem key={item} title={item} />)}
             </div>
         )
     }
