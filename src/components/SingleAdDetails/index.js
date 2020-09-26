@@ -21,7 +21,7 @@ export default class SingleAdDetails extends React.Component {
           <div className="ad-images-and-details">
 
             <div class="ad-detail-image">
-              <img src={imageURL}/>
+              <img alt={title} src={imageURL}/>
             </div>
           
             <div className="ad-mainTitle">
@@ -64,7 +64,7 @@ export default class SingleAdDetails extends React.Component {
               <h6 className="font-weight-bold">Seller Details:</h6>
               <div className='seller-picture-details'>
                 <div className="seller-profile-picture">
-                  <img src={sellerProfilePictureURL} />
+                  <img alt={seller.name} src={sellerProfilePictureURL} />
                 </div>
 
                 <div className="seller-name-and-contact">

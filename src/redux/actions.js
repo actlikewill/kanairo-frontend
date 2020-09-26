@@ -13,3 +13,11 @@ export const closeMenu = item => ({
         showMenu: false
     }
 })
+
+export const loginRequest = data => ({
+    type: 'LOGIN_REQUEST',
+    payload: {
+        url: '/auth/jwt/create/',
+        data
+    }
+})

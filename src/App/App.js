@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
-import { Router, Route, Switch} from 'react-router-dom';
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../redux/store.js';
 import * as Views from '../views';
@@ -29,20 +29,24 @@ function App() {
   return (
     <Provider store={store}>
       <div>
-        <Components.Header />
-        <Components.MainContainer className="App">
-          <Router history={history}>
-            
-                <Components.CategoriesTopMenu />
-                
-                <Route exact path="/" component={Views.HomePage} />
-                <Route exact path="/home" component={Views.HomePage} />
-                <Route exact path="/ad/:title" component={Views.AdDetailPage}  />
-                <Route exact path="/create-ad" component={Views.CreateAd} />
-               
+       
+          <Router history={history}>            
+
+                <Route path="/" component={Components.Header} />
+
+                <Components.MainContainer className="App">                
+                  <Route exact path="/" component={Views.HomePage} />
+                  <Route exact path="/home" component={Views.HomePage} />
+                  <Route exact path="/ad/:title" component={Views.AdDetailPage}  />
+                  <Route exact path="/create-ad" component={Views.CreateAd} />
+                  <Route exact path="/login" component={Views.LoginPage} />
+                </Components.MainContainer>
+
+                <Route path="/" component={Components.Footer} />
+
           </Router>  
-        </Components.MainContainer>
-        <Components.Footer />
+      
+        
       </div>
     </Provider>
   );

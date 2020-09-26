@@ -1,9 +1,6 @@
-import React, {Fragment} from 'react';
-import { connect } from 'react-redux';
-import { openMenu, closeMenu } from '../../redux/actions';
-import Layout from '../../components/Layout';
-import AdThumbnails from '../../components/AdThumbnails';
-import CategoriesSideMenu from '../../components/CategoriesSideMenu';
+import React from 'react';
+import * as Components from '../../components';
+
 
 
 const data = [
@@ -67,24 +64,18 @@ class Home extends React.Component {
   
     render() {      
       return (
-        <>        
-          <Layout>           
-              <CategoriesSideMenu />
-              <AdThumbnails data={data} />        
-          </Layout>
+        <>     
+        <Components.CategoriesTopMenu />  
+          <Components.Layout>           
+              <Components.CategoriesSideMenu />
+              <Components.AdThumbnails data={data} />        
+          </Components.Layout>
         </>
         
       );
     }
 
     
-  }
-
-  const mapDispatchToProps = dispatch => {
-    return {
-      openMenu: item => dispatch(openMenu(item)),
-      closeMenu: () => dispatch(closeMenu())
-    }
   }
 
 export default Home;

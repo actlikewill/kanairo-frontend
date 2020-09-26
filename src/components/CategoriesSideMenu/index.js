@@ -31,8 +31,7 @@ class SideMenu extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    console.log(state);
+function mapStateToProps(state) {    
     return { showMenu: state.menusReducer.showMenu }
   }
   

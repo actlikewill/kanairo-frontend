@@ -15,7 +15,6 @@ class Layout extends React.Component {
   }
 
 function mapStateToProps(state) {
-  console.log(state);
   return { showMenu: state.menusReducer.showMenu }
 }
 

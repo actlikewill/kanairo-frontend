@@ -1,8 +1,5 @@
-import React, {Fragment} from 'react';
-import { connect } from 'react-redux';
-
-import Layout from '../../components/Layout';
-import SingleAdDetails from '../../components/SingleAdDetails';
+import React from 'react';
+import * as Components from '../../components';
 
 
 
@@ -31,10 +28,11 @@ class AdDetailPage extends React.Component {
     render() {  
 
       return (
-        <>        
-          <Layout>           
-              <SingleAdDetails {...this.data} />
-          </Layout>
+        <> 
+          <Components.CategoriesTopMenu />       
+          <Components.Layout>           
+              <Components.SingleAdDetails {...this.data} />
+          </Components.Layout>
         </>
         
       );

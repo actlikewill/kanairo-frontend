@@ -2,16 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, Col } from 'react-bootstrap';
+import { openMenu, closeMenu } from '../../redux/actions';
 import './SingleAdThumbnail.scss'
 
 class SingleAdThumbnail extends React.Component {
     
     render() {
-        const { showMenu } = this.props;  
+        const { showMenu, closeMenu } = this.props;  
         return (
             
                 <Col lg={3}>
-                    <Link to={`/ad/${this.props.title}`}>
+                    <Link onClick={()=> closeMenu()} to={`/ad/${this.props.title}`}>
                         <Card className={`${showMenu ? 'smallerThumbnail' : 'largerThumbnail'} adThumbnail mb-3`}>
                             <Card.Img variant="top" src="https://via.placeholder.com/150" />
                             <Card.Body className='p-1 m-0'>
@@ -26,10 +27,15 @@ class SingleAdThumbnail extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    console.log(state);
+function mapStateToProps(state) {    
     return { showMenu: state.menusReducer.showMenu }
   }
   
+function mapDispatchToProps (dispatch) {
+    return {
+      openMenu: item => dispatch(openMenu(item)),
+      closeMenu: () => dispatch(closeMenu())
+    }
+  }
 
-export default connect(mapStateToProps)(SingleAdThumbnail);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleAdThumbnail);
