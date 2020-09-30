@@ -16,7 +16,6 @@ class LoginPage extends React.Component {
         displayForm: "loginForm",
         error: null
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -40,13 +39,9 @@ class LoginPage extends React.Component {
         .catch(e => {
           const { inner } = e;
           let validationError = {};
-          inner.map(e => {
-            console.log(e.path)
-            validationError[e.path] = e.message;
-          });
+          inner.forEach(e => {validationError[e.path] = e.message});
           if (inner.length > 1 ) validationError.detail = e.message;
           this.setState({validationError});
-
         })    
   }
 

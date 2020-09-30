@@ -32,4 +32,5 @@ describe('Login Page', () => {
         fireEvent.click(getByTestId('switch-to-registerForm'));
         expect(getByTestId('registerButton')).toBeInTheDocument();
     });
+    
 });
