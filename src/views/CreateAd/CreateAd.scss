@@ -1,0 +1,73 @@
+.new-ad {
+    border: 1px solid grey;
+    border-radius: 3px;
+    box-shadow: 0 0px 3px rgba(0,0,0,0.55);
+    margin: 1rem auto;
+    width: 40rem;    
+    position: relative;
+
+    .ad-form {
+        // min-height: 26rem;
+        padding: 3rem;
+    }
+
+    & label {
+        padding: 0;
+        margin: 0 !important;
+    }
+
+    & .form-instructions {
+        margin: 0 0 .5rem 0;
+        display:block;
+        font-size: .8rem;
+    }
+
+    &  .FormTop{
+        min-height: 19rem;        
+    }
+
+    & .adActionButtons {
+        display: flex;
+        & .actionButton {
+            border-radius: 2px;
+    
+           
+            & .Right {
+                margin-left: auto !important;
+            }
+        }
+    }
+
+    & .adImageUpload {
+        margin-top: 1rem;
+    }
+
+    & .adSuccess, & .adFailure {
+        text-align: center;
+        display: flex;
+        color: lighten($color: #000000, $amount: 20);
+        justify-content: center;
+        align-items: center;
+        min-height: 26rem;                   
+    }
+
+    & .messageIconSuccess {
+        font-size: 5rem;
+        color: chartreuse;
+    }
+    & .messageIconFail {
+        font-size: 5rem;
+        color: tomato;
+    }
+
+    & .actionButtonSuccessandFail {
+        border-radius: 2px;
+    }
+
+    
+    & .homePageLink {
+        text-align: center;        
+        padding: 1rem;
+      
+    }
+}

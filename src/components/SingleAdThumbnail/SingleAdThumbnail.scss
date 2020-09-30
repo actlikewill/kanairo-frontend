@@ -1,0 +1,23 @@
+.largerThumbnail {
+    width: calc(69rem / 4);    
+}
+.smallerThumbnail {
+    width: calc(70rem / 5);
+}
+
+.adThumbnail {   
+    .title {
+        font-size: 1rem;
+    }
+    .description {
+        font-size: .8rem;
+    }
+    .price {
+        font-size: .8rem;
+    }    
+}
+
+.adThumbnail:hover {
+    box-shadow: 0 1px 10px rgba(0,0,0,0.15);
+    transition: box-shadow 0.1s ease-in;
+}

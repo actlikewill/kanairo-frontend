@@ -1,0 +1,82 @@
+.ad-details {
+    display: grid;
+    grid-template-columns: 5fr 1rem 2fr;
+    grid-template-areas: "adImagesAndDetails . adPriceAndSeller";
+
+    & .ad-images-and-details {
+        grid-area: adImagesAndDetails;
+        
+        > div {
+            padding: 1rem;
+        }
+        
+    }
+    & .ad-price-and-seller {
+        grid-area: adPriceAndSeller;
+
+        
+        & p {            
+            margin: 0;
+            text-align: center;
+        }
+
+        & h6 {
+            margin: 0;
+            color: white;
+            background-color: #aaa;
+        }
+
+        & .ad-price p {
+            padding: 1rem;
+            color:tomato;
+            font-size: 2rem;
+        }
+
+        & .ad-seller {
+            & .seller-picture-details {
+                padding: 1rem;
+                display: grid;
+                grid-template-columns: '1fr 1fr';
+                grid-template-areas: 'picture details';
+                & .seller-profile-picture {
+                    grid-area: picture
+                }
+    
+                & .seller-name-and-contact {
+                    grid-area: details;
+                    align-self: center;
+                }
+            }
+
+            & p {
+                font-weight: bold;
+                color: grey;
+            }
+        }
+
+    }
+
+    & .ad-price-and-seller, & .ad-images-and-details {
+        > div {
+            margin-bottom: 1rem;            
+            border: 1px solid rgb(221, 216, 216);
+            border-radius: 3px;
+        }
+    }
+
+    & .date-posted, & .location-posted {
+        color: grey;
+        margin: 0;
+        font-size: small;
+        vertical-align: middle;
+    }
+                        
+    & .ad-detail-image {
+        display: grid;
+        justify-content: center;
+    }                  
+
+    
+
+}
+
