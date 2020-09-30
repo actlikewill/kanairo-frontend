@@ -3,21 +3,26 @@ import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_KANAIRO_BACKEND_API;
 
-function requestLoginUser(payload) {   
-    const { url, data } = payload;
-    console.log(`${BACKEND_URL}${url}`);
+const urls = {
+    loginForm: "/auth/jwt/create/",
+    registerForm: "/auth/users/"
+
+}
+
+function authUser(payload) {   
+    const { requestType, data } = payload;
     return axios
-        .post(`${BACKEND_URL}${url}`, data)
+        .post(`${BACKEND_URL}${urls[requestType]}`, data)
         .then(response => ({response}))
         .catch(e => {
             if (e.response) {
                 return { error: e.response.data}
             } else {
-                return { error: e.message}
+                return { error: {detail: e.message}}
             }        
         })    
 }
 
 export {
-    requestLoginUser,
+    authUser,
 }

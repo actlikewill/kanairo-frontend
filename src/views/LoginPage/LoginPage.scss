@@ -8,7 +8,7 @@
     align-items: center;
     & .loginForm {
         width: 30rem;
-        padding: 3rem 3rem .1rem 3rem;       
+        padding: 1rem 3rem .1rem 3rem;       
         border: 1px solid lighten($color: #000000, $amount: 55);
         
         & input {
@@ -25,15 +25,16 @@
 
         & .loginSubmit {
             border-radius: 2px;
-            margin-top: 1rem;
+            margin-top: 0rem;
         }
 
         & .formError {
             color: red;
-            margin: .5rem;
-            font-size: .8rem;
-            min-height: 1.2rem;
-            text-align: center;
+            // margin: .5rem;
+            font-size: .7rem;
+            min-height: 1rem;
+            // text-align: center;
+            // border: 1px solid black;
         }
         .switchForm {
             margin-top: 1rem;

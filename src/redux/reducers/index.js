@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import menusReducer from './menusReducer'
+import menusReducer from './menusReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
-    menusReducer
+    menusReducer,
+    userReducer
 });
 
 

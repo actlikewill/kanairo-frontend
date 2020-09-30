@@ -14,10 +14,10 @@ export const closeMenu = item => ({
     }
 })
 
-export const loginRequest = data => ({
-    type: 'LOGIN_REQUEST',
+export const authRequest = (data, requestType) => ({
+    type: 'AUTH_REQUEST',
     payload: {
-        url: '/auth/jwt/create/',
+        requestType,
         data
     }
 })
