@@ -13,7 +13,8 @@ import {
     faArrowRight,
     faArrowLeft,
     faImages,
-    faWindowClose
+    faWindowClose,
+    faCaretDown
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add({
@@ -22,7 +23,8 @@ library.add({
     faArrowRight,
     faArrowLeft,
     faImages,
-    faWindowClose
+    faWindowClose,
+    faCaretDown
   });
 
 function App() {

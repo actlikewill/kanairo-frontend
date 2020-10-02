@@ -4,7 +4,8 @@ import "./AdDetails.scss";
 
 export default class SingleAdDetails extends React.Component {
   
-    render() {        
+    render() {   
+      document.title = "View Ad | Kanairo"     
              const { 
                 imageURL,
                 title, 
@@ -20,7 +21,7 @@ export default class SingleAdDetails extends React.Component {
         <div className="ad-details">
           <div className="ad-images-and-details">
 
-            <div class="ad-detail-image">
+            <div className="ad-detail-image">
               <img alt={title} src={imageURL}/>
             </div>
           

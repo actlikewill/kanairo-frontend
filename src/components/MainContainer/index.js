@@ -1,9 +1,17 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getUserDetails } from '../../redux/actions';
 import './MainContainer.scss';
 
 
-export default class MainContainer extends React.Component {
+class MainContainer extends React.Component {
+
+  componentDidMount(){
+    const token = localStorage.getItem("token");
+    if(token) this.props.getUserData(token);
+  }
+
     render() {
       return (
         <Container className="App">
@@ -12,3 +20,12 @@ export default class MainContainer extends React.Component {
       );
     }
   }
+
+
+  const mapDispatchToProps = dispatch => {
+    return {
+      getUserData: (token) => dispatch(getUserDetails(token))
+    }
+  }
+
+  export default connect(null, mapDispatchToProps)(MainContainer)
