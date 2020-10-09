@@ -31,6 +31,12 @@
             margin-top: 0rem;
         }
 
+        & .google-login-button, & .facebook-login-button{
+            border-radius: 2px;
+            cursor: pointer;
+            margin-bottom: .5rem;
+        }
+
         & .formError {
             color: red;
             // margin: .5rem;

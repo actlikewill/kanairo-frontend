@@ -6,6 +6,7 @@ import * as Views from '../views';
 import * as Components from '../components';
 import history from './history';
 import './App.scss';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
     faCalendarAlt,
@@ -14,18 +15,26 @@ import {
     faArrowLeft,
     faImages,
     faWindowClose,
-    faCaretDown
+    faCaretDown,
+
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add({
+export function registerIcons() {
+  library.add(
+    fab,
     faCalendarAlt,
     faMapMarker,
     faArrowRight,
     faArrowLeft,
     faImages,
     faWindowClose,
-    faCaretDown
-  });
+    faCaretDown,
+  );
+}
+
+registerIcons();
+
+
 
 function App() {
   return (

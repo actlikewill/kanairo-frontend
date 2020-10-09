@@ -3,10 +3,12 @@ import {ReactComponent as Logo} from '../../components/Header/img/logo.svg';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import validator from './validations';
 import qs from 'query-string';
 import './LoginPage.scss';
-
+import qs from 'query-string';
+import { GoogleLogin } from 'react-google-login';
 import { authRequest } from '../../redux/actions';
 
 
@@ -21,6 +23,48 @@ class LoginPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
+  componentDidMount() {
+    this.loadFbLoginApi();
+    if(this.props.location) {
+      const params = qs.parse(this.props.location.search);
+    if(params.newUser === 'true') {
+      this.setState({ displayForm: 'registerForm'})
+    }
+    }
+    
+  }
+  
+
+  getFBtoken() {
+    console.log('Welcome!  Fetching your information.... ');
+    window.FB.getAuthResponse(function(response) {
+      console.log(response)
+    
+    });
+  }
+
+  statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    if (response.status === 'connected') {
+      this.getFBtoken();
+    } else if (response.status === 'not_authorized') {
+        console.log("Please log into this app.");
+    } else {
+        console.log("Please log into this facebook.");
+        console.log(response)
+    }
+  }
+
+  checkLoginState() {
+    window.FB.getLoginStatus(function(response) {
+      this.statusChangeCallback(response);
+    }.bind(this));
+  }
+  
+  handleFBLogin = () => {
+    window.FB.login(this.checkLoginState());
+    }
 
   componentDidMount() {
     if(this.props.location) {
@@ -66,8 +110,32 @@ class LoginPage extends React.Component {
         })
     }  
 
+    responseGoogle = (response) => {
+      console.log(response.accessToken)
+    }
 
+    responseFacebook = () => {
+      console.log(window)
+    }
 
+    loadFbLoginApi() {
+      window.fbAsyncInit = function() {
+          window.FB.init({
+              appId      : process.env.REACT_APP_FACEBOOK_APP_ID,
+              cookie     : true,  
+              xfbml      : true, 
+              version    : 'v2.5'
+          });
+      };
+      console.log("Loading fb api");
+      (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+}
    
     render() {  
         document.title = "Login | Kanairo"
@@ -97,6 +165,32 @@ class LoginPage extends React.Component {
                   <hr/>
                   <div className="switchForm">
                   <p>Don't have an account? <span data-testid="switch-to-registerForm" onClick={()=> this.switchForm('registerForm')}>Create an Account Here.</span></p>
+                  </div>
+                  <hr/>
+                  <div className="google-login-button">
+                  <GoogleLogin
+                    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                    buttonText="Login"
+                    render={renderProps => (
+                      <Button block size="sm" variant="outline-danger" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                        <FontAwesomeIcon icon={['fab', 'google']} />
+                        {"  "}
+                        Login With Google
+                      </Button>
+                    )
+
+                    }
+                    onSuccess={(r) => this.responseGoogle(r)}
+                    onFailure={(r) =>this.responseGoogle(r)}
+                    cookiePolicy={'single_host_origin'}
+                  />
+                  </div>
+                  <div className="facebook-login-button d-flex justify-content-center">
+                    <Button onClick={this.handleFBLogin} block size="sm" variant="outline-primary">
+                       <FontAwesomeIcon icon={['fab', 'facebook']} />
+                       {"  "}
+                       Login With Facebook
+                    </Button>
                   </div>
                 </Form.Group>
               </Form>

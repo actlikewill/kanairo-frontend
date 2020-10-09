@@ -25,10 +25,15 @@ const renderWithRedux = (
 describe('Login Page', () => {
 
     afterEach(cleanup);
-    
-    it('checks if the login button renders', () => {
-        const {getByTestId} = renderWithRedux(<LoginPage />); 
 
+    beforeAll(() => {
+      let scriptTag = document.createElement('script');
+        document.body.appendChild(scriptTag);
+    });
+
+    
+    it('checks if the login button renders', () => {      
+        const {getByTestId} = renderWithRedux(<LoginPage />);       
         expect(getByTestId('loginButton')).toBeInTheDocument();
     });
     it('checks if the form switcher changes the form', () => {
