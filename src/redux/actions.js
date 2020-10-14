@@ -21,3 +21,12 @@ export const authRequest = (data, requestType) => ({
         data
     }
 })
+
+export const getUserDetails = (token) => ({
+    type: 'GET_USER_REQUEST',
+    token
+})
+
+export const logoutUser = () =>({
+  type: 'LOGOUT_USER_REQUEST'
+})

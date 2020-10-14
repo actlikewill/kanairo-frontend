@@ -1,8 +1,10 @@
 import React from 'react';
 import {ReactComponent as Logo} from '../../components/Header/img/logo.svg';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import validator from './validations';
+import qs from 'query-string';
 import './LoginPage.scss';
 
 import { authRequest } from '../../redux/actions';
@@ -18,6 +20,16 @@ class LoginPage extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if(this.props.location) {
+      const params = qs.parse(this.props.location.search);
+    if(params.newUser === 'true') {
+      this.setState({ displayForm: 'registerForm'})
+    }
+    }
+    
   }
 
     handleChange(event) {
@@ -69,17 +81,19 @@ class LoginPage extends React.Component {
             <div className="loginPage">  
             <div className="loginForm">
               <div className="formLogo">
-                <Logo className="svg-logo" />
+              <Link to="/home">
+                  <Logo className="form-svg-logo"/>
+              </Link>
               </div>
               <h4 className="font-weight-bold">Login</h4>
               <Form name="loginForm" onSubmit={this.handleSubmit}>
                 <Form.Group controlId="loginForm">                          
-                  <Form.Control type="text" placeholder="  Email" name="email" onChange={this.handleChange}/>
+                  <Form.Control size="sm" type="text" placeholder="  Email" name="email" onChange={this.handleChange}/>
                   <div className="formError">{error.email ? <span>{error.email}</span> :null}</div>                      
-                  <Form.Control type="password" placeholder="  Password" name="password" onChange={this.handleChange}/>
+                  <Form.Control size="sm" type="password" placeholder="  Password" name="password" onChange={this.handleChange}/>
                   <div className="formError">{error.password ? <span>{error.password}</span> :null}</div>
                   <div className="formError">{error ?  <span>{error.detail}</span> :null}</div>
-                  <Button data-testid="loginButton" block variant="success" className="loginSubmit" type="submit">Login</Button>
+                  <Button size="sm" data-testid="loginButton" block variant="success" className="loginSubmit" type="submit">Login</Button>
                   <hr/>
                   <div className="switchForm">
                   <p>Don't have an account? <span data-testid="switch-to-registerForm" onClick={()=> this.switchForm('registerForm')}>Create an Account Here.</span></p>
@@ -96,22 +110,24 @@ class LoginPage extends React.Component {
             <div className="loginPage">  
             <div className="loginForm">
               <div className="formLogo">
-               <Logo className="svg-logo" />
+                <Link to="/home">
+                  <Logo className="form-svg-logo"/>
+                </Link>
               </div>
 
               <h4 className="font-weight-bold">Create Account</h4>
               <Form name="registerForm" onSubmit={this.handleSubmit}>
-                <Form.Group controlId="registerForm">                         
-                  <Form.Control type="email" placeholder="  Email" name="email" onChange={this.handleChange}/>
+                <Form.Group size="sm" controlId="registerForm">                         
+                  <Form.Control size="sm" type="email" placeholder="  Email" name="email" onChange={this.handleChange}/>
                   <div className="formError">{error.email ? <span>{error.email}</span> :null}</div>                       
-                  <Form.Control type="text" placeholder="  Username" name="username" onChange={this.handleChange}/>
+                  <Form.Control size="sm" type="text" placeholder="  Username" name="username" onChange={this.handleChange}/>
                   <div className="formError">{error.username ? <span>{error.username}</span> :null}</div>                       
-                  <Form.Control type="password" placeholder="  Password" name="password" onChange={this.handleChange}/>
+                  <Form.Control size="sm" type="password" placeholder="  Password" name="password" onChange={this.handleChange}/>
                   <div className="formError">{error.password ? <span>{error.password}</span> :null}</div>                       
-                  <Form.Control type="password" placeholder="  Confirm Password" name="confirmPassword" onChange={this.handleChange}/>
+                  <Form.Control  size="sm"type="password" placeholder="  Confirm Password" name="confirmPassword" onChange={this.handleChange}/>
                   <div className="formError">{error.confirmPassword ? <span>{error.confirmPassword}</span> :null}</div>  
                   <div className="formError">{error ? <span>{error.detail}</span> :null}</div>
-                  <Button data-testid="registerButton" block variant="success" className="loginSubmit" type="submit">Create Account</Button>
+                  <Button size="sm" data-testid="registerButton" block variant="success" className="loginSubmit" type="submit">Create Account</Button>
                   <hr/>
                   <div className="switchForm">
                     <p>Already Have an account? <span data-testid="switch-to-loginForm" onClick={()=> this.switchForm('loginForm')}>Login Here.</span></p>

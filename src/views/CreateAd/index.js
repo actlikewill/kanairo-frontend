@@ -4,11 +4,8 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import history from '../../App/history';
 import NewAdForm from './NewAdForm';
+import requireAuth from '../../components/Auth';
 import './CreateAd.scss';
-
-
-
-
 
 class CreateAd extends React.Component {
   constructor(props) {
@@ -95,4 +92,4 @@ class CreateAd extends React.Component {
   }
 
 
-export default CreateAd;
+export default requireAuth(CreateAd);
