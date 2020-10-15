@@ -22,6 +22,14 @@ export const authRequest = (data, requestType) => ({
     }
 })
 
+export const socialLogin = (token, tokenType) => ({
+    type: 'SOCIAL_LOGIN',
+    payload: {
+        token,
+        tokenType
+    }
+})
+
 export const getUserDetails = (token) => ({
     type: 'GET_USER_REQUEST',
     token

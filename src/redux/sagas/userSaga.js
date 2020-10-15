@@ -29,6 +29,17 @@ function* loginUser(action) {
     }
 }
 
+function* socialLogin(action) {
+    const { response, error} = yield call(API.socialAuth, action.payload);
+    if (response) {
+        yield put({type: 'GET_USER_SUCCESS', user: response.data })
+        yield call(history.push, '/home');
+    } else
+    if (error) {
+        yield put({type: 'GET_USER_ERROR', error})
+    }
+}
+
 function* getUser(action) {
     const {token} = action;
     const { response, error} = yield call(API.getUser, token);
@@ -62,4 +73,8 @@ export function* watchGetUser() {
 
 export function* watchLogutUser() {
     yield takeEvery('LOGOUT_USER_REQUEST', logoutUser)
+}
+
+export function* watchSocialLogin() {
+    yield takeEvery('SOCIAL_LOGIN', socialLogin)
 }

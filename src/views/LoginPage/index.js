@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import validator from './validations';
-import qs from 'query-string';
 import './LoginPage.scss';
 import qs from 'query-string';
 import { GoogleLogin } from 'react-google-login';
-import { authRequest } from '../../redux/actions';
+import FacebookAuth from './socialAuthenticationHelpers';
+import { authRequest, socialLogin } from '../../redux/actions';
 
 
 class LoginPage extends React.Component {  
@@ -22,68 +22,39 @@ class LoginPage extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.fbAuth = new FacebookAuth();
   }
   
   componentDidMount() {
-    this.loadFbLoginApi();
+    this.fbAuth.loadFbLoginApi();
     if(this.props.location) {
       const params = qs.parse(this.props.location.search);
     if(params.newUser === 'true') {
-      this.setState({ displayForm: 'registerForm'})
+      this.setState({ displayForm: 'registerForm'});
+        }
+      }    
     }
-    }
-    
-  }
-  
-
-  getFBtoken() {
-    console.log('Welcome!  Fetching your information.... ');
-    window.FB.getAuthResponse(function(response) {
-      console.log(response)
-    
-    });
-  }
-
-  statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    if (response.status === 'connected') {
-      this.getFBtoken();
-    } else if (response.status === 'not_authorized') {
-        console.log("Please log into this app.");
-    } else {
-        console.log("Please log into this facebook.");
-        console.log(response)
-    }
-  }
-
-  checkLoginState() {
-    window.FB.getLoginStatus(function(response) {
-      this.statusChangeCallback(response);
-    }.bind(this));
-  }
   
   handleFBLogin = () => {
-    window.FB.login(this.checkLoginState());
+    window.FB.login((response) => {
+      if (response.authResponse) {        
+        const token =response.authResponse.accessToken;
+        console.log(token);     
+        this.props.socialAuth(token, 'Bearer facebook')   
+       } else {
+        console.log('User cancelled login or did not fully authorize.');
+       }
+    }, {scope: 'email'});
     }
 
-  componentDidMount() {
-    if(this.props.location) {
-      const params = qs.parse(this.props.location.search);
-    if(params.newUser === 'true') {
-      this.setState({ displayForm: 'registerForm'})
-    }
-    }
-    
-  }
-
-    handleChange(event) {
+  handleChange(event) {
       const { name, value } = event.target;
        this.setState((prevProps) =>{
           return {formData: {...prevProps.formData, [name]: value}}        
         }); 
        }   
 
-    handleSubmit(event) {      
+  handleSubmit(event) {      
       event.preventDefault();
       this.setState({validationError: null})
       const { name } = event.target;      
@@ -101,7 +72,7 @@ class LoginPage extends React.Component {
         })    
   }
 
-    switchForm(displayForm) {
+  switchForm(displayForm) {
       this.setState({
           displayForm,
           formData: null,
@@ -110,34 +81,17 @@ class LoginPage extends React.Component {
         })
     }  
 
-    responseGoogle = (response) => {
+  responseGoogle = (response) => {
       console.log(response.accessToken)
+      this.props.socialAuth(response.accessToken, 'Bearer google-oauth2')
     }
 
-    responseFacebook = () => {
+  responseFacebook = () => {
       console.log(window)
     }
 
-    loadFbLoginApi() {
-      window.fbAsyncInit = function() {
-          window.FB.init({
-              appId      : process.env.REACT_APP_FACEBOOK_APP_ID,
-              cookie     : true,  
-              xfbml      : true, 
-              version    : 'v2.5'
-          });
-      };
-      console.log("Loading fb api");
-      (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js";
-          fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-}
    
-    render() {  
+  render() {  
         document.title = "Login | Kanairo"
         const { displayForm, validationError } = this.state;
         const { authError  } = this.props;
@@ -181,7 +135,7 @@ class LoginPage extends React.Component {
 
                     }
                     onSuccess={(r) => this.responseGoogle(r)}
-                    onFailure={(r) =>this.responseGoogle(r)}
+                    onFailure={(r) => this.responseGoogle(r)}
                     cookiePolicy={'single_host_origin'}
                   />
                   </div>
@@ -240,7 +194,8 @@ class LoginPage extends React.Component {
 const mapDispatchToProps = dispatch => {
  
   return {
-    requestAuth: (data, requestType)=> dispatch(authRequest(data, requestType))
+    requestAuth: (data, requestType)=> dispatch(authRequest(data, requestType)),
+    socialAuth: (token, tokenType)=> dispatch(socialLogin(token, tokenType))
   }
 }
 
