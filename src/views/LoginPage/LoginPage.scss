@@ -8,12 +8,12 @@
     align-items: center;
     & .loginForm {
         width: 30rem;
-        padding: 1rem 3rem .1rem 3rem;       
+        padding: 2rem 3rem .1rem 3rem;       
         border: 1px solid lighten($color: #000000, $amount: 55);
         
         & input {
             border-radius: 2px;
-
+            
             padding: 0;
             margin: .5rem 0 0 0;
         }
@@ -21,6 +21,9 @@
             display: flex;
             justify-content: center;
             margin-bottom: 1rem;
+             & .form-svg-logo{
+                 width: 200px;
+             }
         }
 
         & .loginSubmit {

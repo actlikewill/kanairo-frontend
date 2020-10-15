@@ -1,12 +1,42 @@
 
 .header {    
-   
-    border-bottom: 1px solid grey;
     background-color: #eee;
+
+    & .d-flex > div {
+        // border: 1px solid black;
+    }
+
+    & .svg-logo {    
+        width: 150px;
+        padding-left: 1rem
+    }
+
+    & .user-details {
+        padding-top: 1rem;
+        font-weight: bold;
+        color: lighten($color: #000000, $amount: 20);
+        position: relative;
+        cursor: pointer;
+        // border: 1px solid black;
+    }
+     & .user-menu {
+         position: absolute;
+         border: 1px solid #bbb;
+         background-color: #eee;
+         margin-top: -1rem;
+         padding: .5rem 1rem .5rem .5rem;
+         z-index: 1000;
+         cursor: pointer;
+         bottom: -2rem;
+         display: none;
+     }
+      & .user-menu:hover {
+        background-color: #fff;
+      }
+
+      & .showLogoutMenu {
+          display: block;
+      }
 }
 
 
-.svg-logo {
-    
-    width: 200px;
-}

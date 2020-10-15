@@ -1,4 +1,5 @@
 import AdThumbnails from './AdThumbnails';
+import Auth from './Auth';
 import CategoriesSideMenu from './CategoriesSideMenu';
 import CategoriesTopMenu from './CategoriesTopMenu';
 import Footer from './Footer';
@@ -10,6 +11,7 @@ import SingleAdThumbnail from './SingleAdThumbnail';
 
 export {
     AdThumbnails,
+    Auth,
     CategoriesSideMenu,
     CategoriesTopMenu,
     Footer,
